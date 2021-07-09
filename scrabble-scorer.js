@@ -1,4 +1,4 @@
-// inspired by https://exercism.io/tracks/javascript/exercises/etl/solutions/91f99a3cca9548cebe5975d7ebca6a85
+  // inspired by https://exercism.io/tracks/javascript/exercises/etl/solutions/91f99a3cca9548cebe5975d7ebca6a85
 
 const input = require("readline-sync");
 
@@ -32,30 +32,74 @@ function oldScrabbleScorer(word) {
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
-function initialPrompt(prompts) {
-  let intro = input.question("Let's play some Scrabble! \n\n\n Enter a word: ")
-  return intro[prompts];
+function initialPrompt() {
+  let intro = input.question("Let's play some Scrabble!\n\n\n Enter the word: ")
+  return intro;
+}
+  
+
+function simpleScore(word) {
+  let letterPoints = word.length;
+  return letterPoints;
 }
 
+function vowelBonusScore(word) {
+  word = word.toUpperCase();
+  let vowels = ['A', 'E', 'I', 'O', 'U'];
+  for(i = 0; i < word.length; i++) {
+    if(vowels.includes(word[i])) {
+      letterPoints += 3;
+    } else {
+      letterPoints += 1;
+    }
+  }
+  return;
 
+} 
 
-let simpleScore = "";
+function scrabbleScore(word) {
+  let letterPoints = 0
+  for(let i = 0; i < word.length; i++) {
+    for(letterPoints in newPointStructure) {
+      if(newPointStructure[letterPoints].includes(word[i])) {
 
-let vowelBonusScore;
+      }
+    }
+  }
+  return letterPoints;
+} 
 
-let scrabbleScore;
+const scoringAlgorithms = [
+  {
+    name: "Simple Score",
+    description: "Each letter is worth 1 point.",
+    scoreFunction: simpleScore
+  },
+  {
+    name: "Bonus Vowels",
+    desciption: "Vowels are 3pts, consonants are 1 pt.",
+    scoreFunction: vowelBonusScore
+  },
+  {
+    name: "Scrabble",
+    description: "The traditional scoring algorithm.",
+    scoreFunction: scrabbleScore
+  },
+];
 
-const scoringAlgorithms = [];
-
-function scorerPrompt() {}
+function scorerPrompt() {
+    scoreQuestion = Number(input.question())
+}
 
 function transform() {};
 
-let newPointStructure;
+let newPointStructure = transform(oldPointStructure);
+newPointStructure = 0
+
 
 function runProgram() {
    initialPrompt();
-   
+   scorerPrompt();
 }
 
 // Don't write any code below this line //

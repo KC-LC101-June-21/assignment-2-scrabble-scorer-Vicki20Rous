@@ -77,7 +77,7 @@ const scoringAlgorithms = [
   },
   {
     name: "Bonus Vowels",
-    desciption: "Vowels are 3pts, consonants are 1 pt.",
+    description: "Vowels are 3pts, consonants are 1 pt.",
     scoreFunction: vowelBonusScore
   },
   {
@@ -88,20 +88,23 @@ const scoringAlgorithms = [
 ];
 
 function scorerPrompt() {
-    scoreQuestion = Number(input.question())
+  console.log(`Which scoring algorithm would you like to use?\n`);
+  for(let i = 0; i < scoringAlgorithms.length; i++){
+    console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`)
+  }
+    let scoreQuestion = Number(input.question(`Enter 0, 1, or 2: `));
 }
 
 function transform() {};
 
 let newPointStructure = transform(oldPointStructure);
-newPointStructure = 0
 
 
 function runProgram() {
-   initialPrompt();
-   scorerPrompt();
+  initialPrompt();
+  scorerPrompt();
+   
 }
-
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
 module.exports = {

@@ -33,16 +33,16 @@ function oldScrabbleScorer(word) {
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-  let intro = input.question("Let's play some Scrabble!\n\n\n Enter the word: ")
+  let intro = input.question("Let's play some Scrabble!\n\n Enter the word: ")
   return intro;
 }
   
 
 function simpleScore(word) {
   // word = word.length;
-  return simpleScore;
+  return;
 }
-console.log(simpleScore);
+console.log();
 
 function vowelBonusScore(word) {
   word = word.toUpperCase();
@@ -89,7 +89,7 @@ const scoringAlgorithms = [
 ];
 
 function scorerPrompt() {
-  console.log(`Which scoring algorithm would you like to use?\n`);
+  console.log(`\nWhich scoring algorithm would you like to use?\n`);
   for(let i = 0; i < scoringAlgorithms.length; i++){
     console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`)
   }

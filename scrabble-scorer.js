@@ -37,12 +37,12 @@ function initialPrompt() {
   return intro;
 }
   
-
-function simpleScore(word) {
-  // word = word.length;
-  return;
-}
-console.log();
+let simpleScore = 0;
+// function simpleScore(word) {
+//   let letterPoints = word.length;
+//   return letterPoints;
+// }
+// console.log(simpleScore);
 
 function vowelBonusScore(word) {
   word = word.toUpperCase();
@@ -93,7 +93,7 @@ function scorerPrompt() {
   for(let i = 0; i < scoringAlgorithms.length; i++){
     console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`)
   }
-    let scoreQuestion = Number(input.question(`Enter 0, 1, or 2: `));
+    let scoreQuestion = Number(input.question(`\nEnter 0, 1, or 2: `));
 }
 
 function transform() {};

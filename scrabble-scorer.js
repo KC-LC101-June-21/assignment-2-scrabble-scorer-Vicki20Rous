@@ -39,9 +39,10 @@ function initialPrompt() {
   
 
 function simpleScore(word) {
-  let letterPoints = word.length;
-  return letterPoints;
+  // word = word.length;
+  return simpleScore;
 }
+console.log(simpleScore);
 
 function vowelBonusScore(word) {
   word = word.toUpperCase();

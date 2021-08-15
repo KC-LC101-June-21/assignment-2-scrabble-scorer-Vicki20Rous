@@ -39,16 +39,20 @@ function initialPrompt() {
   
 // let simpleScore;
 function simpleScore(word) {
-  return word
+  let score = 0;
+  for (let i = 0; i < word.length; i++) {
+    score += 1;
+  }
+  return score;
+
 }
 // console.log(simpleScore);
 
 function vowelBonusScore(word) {
-  word = word.toUpperCase();
   let vowels = ['A', 'E', 'I', 'O', 'U'];
   let score = 0;
   for(i = 0; i < word.length; i++) {
-    if(vowels.includes(word[i])) {
+    if(vowels.includes(word[i].toUpperCase())) {
       score += 3;
     } else {
       score += 1;
@@ -59,10 +63,10 @@ function vowelBonusScore(word) {
 } 
 
 function scrabbleScore(word) {
-  word = word.toUpperCase();
+  let words = word.toUpperCase()
   let score = 0
   for(let i = 0; i < word.length; i++) {
-    score += Number(newPointStructure[word[i]])
+    score += newPointStructure[words[i]];
   }
   return score;
 
@@ -86,7 +90,7 @@ const scoringAlgorithms = [
   },
 ];
 
-function scorerPrompt() {
+function scorerPrompt(word) {
   console.log(`\nWhich scoring algorithm would you like to use?\n`);
   for(let i = 0; i < scoringAlgorithms.length; i++){
     console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`)
@@ -96,13 +100,12 @@ function scorerPrompt() {
 }
 
 function transform(words) {
-  let newWordPoints = {};
-  for (let i in words) {
-    let newOrder = words[i];
-    for (let v = 0; v < newOrder.length; i++) {
-      newWordPoints[newOrder[v].toUpperCase()] = Number(i)
+  const newWordPoints = {};
+  for (let newOrder in words) {
+    for (let i in words[newOrder])
+      newWordPoints[words[newOrder][i].toUpperCase()] = Number(newOrder);
     }
-  }
+
   return newWordPoints;
 };
 

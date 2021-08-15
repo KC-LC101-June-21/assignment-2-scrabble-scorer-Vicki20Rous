@@ -36,23 +36,21 @@ function initialPrompt() {
   let intro = input.question("Let's play some Scrabble!\n\n Enter the word: ")
   return intro;
 }
+
   
 // let simpleScore;
 function simpleScore(word) {
-  let score = 0;
-  for (let i = 0; i < word.length; i++) {
-    score += 1;
-  }
-  return score;
-
+  return word;
 }
+  
+
 // console.log(simpleScore);
 
 function vowelBonusScore(word) {
   let vowels = ['A', 'E', 'I', 'O', 'U'];
   let score = 0;
-  for(i = 0; i < word.length; i++) {
-    if(vowels.includes(word[i].toUpperCase())) {
+  for(let i = 0; i < word.length; i++) {
+    if(vowels.includes(word[i].toLowerCase())) {
       score += 3;
     } else {
       score += 1;
@@ -63,11 +61,11 @@ function vowelBonusScore(word) {
 } 
 
 function scrabbleScore(word) {
-  let words = word.toUpperCase()
-  let score = 0
-  for(let i = 0; i < word.length; i++) {
-    score += newPointStructure[words[i]];
-  }
+  let score = 0;
+  word = word.toUpperCase();
+  for (let i = 0; i < word.length; i++) {
+    score += newPointStructure[word[i]];
+  }  
   return score;
 
 } 
@@ -96,7 +94,8 @@ function scorerPrompt(word) {
     console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`)
   }
     let scoreQuestion = Number(input.question(`\nEnter 0, 1, or 2: `));
-    return `Score for ${word}: ${scoringAlgorithms[scoreQuestion].scoreFunction(word)}`;
+    return scoreQuestion;
+  
 }
 
 function transform(words) {
@@ -113,8 +112,9 @@ let newPointStructure = transform(oldPointStructure);
 
 
 function runProgram() {
-  initialPrompt();
-  scorerPrompt();   
+  let word = initialPrompt();
+  let score = scorerPrompt();
+  console.log(`Score for ${word}: ${scoringAlgorithms[score].scoreFunction(word)}`)   
 }
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //

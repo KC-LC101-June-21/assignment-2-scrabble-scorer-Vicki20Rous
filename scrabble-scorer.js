@@ -2,6 +2,7 @@
 
 const input = require("readline-sync");
 
+
 const oldPointStructure = {
   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
   2: ['D', 'G'],
@@ -32,19 +33,17 @@ function oldScrabbleScorer(word) {
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
+let intro = "";
+
 function initialPrompt() {
-  let intro = input.question("Let's play some Scrabble!\n\n Enter the word: ")
+  intro = input.question("Let's play some scrabble! Enter a word: ")
   return intro;
 }
 
   
-// let simpleScore;
 function simpleScore(word) {
-  return word;
-}
-  
-
-// console.log(simpleScore);
+  return word.length
+};
 
 function vowelBonusScore(word) {
   let vowels = ['A', 'E', 'I', 'O', 'U'];
@@ -88,22 +87,24 @@ const scoringAlgorithms = [
   },
 ];
 
-function scorerPrompt(word) {
-  console.log(`\nWhich scoring algorithm would you like to use?\n`);
+function scorerPrompt() {
+   console.log(`\nWhich scoring algorithm would you like to use?`)
   for(let i = 0; i < scoringAlgorithms.length; i++){
-    console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`)
+    console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`) 
+     
   }
-    let scoreQuestion = Number(input.question(`\nEnter 0, 1, or 2: `));
-    return scoreQuestion;
-  
-}
+  let scoreQuestion = Number(input.question(`\nEnter 0, 1, or 2: `)); 
+    console.log(`Score for '${intro}': ${scoringAlgorithms[scoreQuestion].scoreFunction(intro)}`)
+}   
 
 function transform(words) {
-  const newWordPoints = {};
+  let newWordPoints = {};
   for (let newOrder in words) {
-    for (let i in words[newOrder])
-      newWordPoints[words[newOrder][i].toUpperCase()] = Number(newOrder);
+    let simple = words[newOrder]
+    for (let i = 0; i < newOrder.length; i++) {
+      newWordPoints[simple[i].toUpperCase()] = Number(newOrder);
     }
+  }
 
   return newWordPoints;
 };
@@ -112,10 +113,11 @@ let newPointStructure = transform(oldPointStructure);
 
 
 function runProgram() {
-  let word = initialPrompt();
-  let score = scorerPrompt();
-  console.log(`Score for ${word}: ${scoringAlgorithms[score].scoreFunction(word)}`)   
-}
+  initialPrompt();
+  scorerPrompt();
+  // console.log(`Score for ${intro}: ${scoringAlgorithms[scoreQuestion].scoreFunction(intro, newPointStructure)}`);
+
+};
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
 module.exports = {
@@ -130,4 +132,3 @@ module.exports = {
 	runProgram: runProgram,
 	scorerPrompt: scorerPrompt
 };
-

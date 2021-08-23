@@ -48,8 +48,9 @@ function simpleScore(word) {
 function vowelBonusScore(word) {
   let vowels = ['A', 'E', 'I', 'O', 'U'];
   let score = 0;
+  word = word.toLowerCase();
   for(let i = 0; i < word.length; i++) {
-    if(vowels.includes(word[i].toLowerCase())) {
+    if(vowels.includes(word[i])) {
       score += 3;
     } else {
       score += 1;
@@ -91,17 +92,16 @@ function scorerPrompt() {
    console.log(`\nWhich scoring algorithm would you like to use?`)
   for(let i = 0; i < scoringAlgorithms.length; i++){
     console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`) 
-     
+    }
+    let scoreQuestion = Number(input.question(`\nEnter 0, 1, or 2: `)); 
+    console.log(`Score for '${intro}': ${scoringAlgorithms[scoreQuestion].scoreFunction(intro)}`) 
   }
-  let scoreQuestion = Number(input.question(`\nEnter 0, 1, or 2: `)); 
-    console.log(`Score for '${intro}': ${scoringAlgorithms[scoreQuestion].scoreFunction(intro)}`)
-}   
-
+  
 function transform(words) {
   let newWordPoints = {};
   for (let newOrder in words) {
     let simple = words[newOrder]
-    for (let i = 0; i < newOrder.length; i++) {
+    for (let i = 0; i < simple.length; i++) {
       newWordPoints[simple[i].toUpperCase()] = Number(newOrder);
     }
   }
